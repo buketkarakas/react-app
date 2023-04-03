@@ -1,0 +1,14 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "firstName": "Buket",
+            "lastName": "Karakas",
+            "email": "buketkarakas8@gmail.com",
+            "phoneNumber": "+358504256532",
+            "age": 25,
+            "address":"jämeräntäival 1A 151"
+
+        }
+    ]
+}

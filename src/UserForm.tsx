@@ -1,4 +1,4 @@
-import { Select, TextField, SelectChangeEvent, MenuItem, FormControl, FormLabel } from "@mui/material";
+import { Select, TextField, Button, SelectChangeEvent, MenuItem, FormControl, FormLabel, InputLabel } from "@mui/material";
 import React, { useState } from "react";
 
 interface UserFormData {
@@ -17,13 +17,13 @@ export default function UserForm() {
         lastName: '',
         email: '',
         phoneNumber: '',
-        age: 0,
+        age: 18,
         address: ''
     });
     const [errors, setErrors] = useState<Partial<UserFormData>>({});
 
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (event: any) => {
         event.preventDefault();
         console.log(formData);
     }
@@ -33,13 +33,13 @@ export default function UserForm() {
         setFormData((prevFormData) => ({...prevFormData, [name]: value}))
     };
 
-    const handleSelectChange = (event: SelectChangeEvent) => {
+    const handleSelectChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
-        setFormData((prevFormData) => ({...prevFormData, [name]: value }));
+        setFormData((prevFormData) => ({...prevFormData, [name]: Number(value) }));
       };
 
     return (
-        <FormControl style={{margin: 50}}>
+        <FormControl margin="normal" style={{margin: 30, width: "600px"}}>
             <FormLabel component="legend">User Information</FormLabel>
             <TextField
                 label='First Name'
@@ -93,22 +93,24 @@ export default function UserForm() {
                 fullWidth
                 margin='normal'
             />
-            <Select
-                label='Age'
-                name='Age'
+            <TextField
+                id="select-age"
+                name='age'
                 value={String(formData.age)}
                 onChange={handleSelectChange}
                 error={Boolean(errors.age)}
                 fullWidth
-                margin='none'
-            >
+                label="Age"
+                select
+                margin="normal"
+            >   
                 {Array.from({ length: 103 }, (_, i) => i + 18).map((age) => (
                     <MenuItem key={age} value={age}>
                         {age}
                     </MenuItem>
                     ))}
-            </Select>
-
+            </TextField>
+            <Button sx={{margin: 5}} color="secondary" variant="contained" onClick={handleSubmit}>Submit</Button>
         </FormControl>
     )
 
