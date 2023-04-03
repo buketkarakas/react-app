@@ -26,17 +26,18 @@ export default function UserForm() {
 
     const handleSubmit = (event: any) => {
         event.preventDefault();
-        UserService
-        .create(formData)
-        .then(response => setFormData({
-            firstName: '',
-            lastName: '',
-            email: '',
-            phoneNumber: '',
-            age: 18,
-            address: ''
-        }))
-        
+        if(validateForm()){
+            UserService
+            .create(formData)
+            .then(response => setFormData({
+                firstName: '',
+                lastName: '',
+                email: '',
+                phoneNumber: '',
+                age: 18,
+                address: ''
+            }))
+        }
     }
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement> ) => {
@@ -48,6 +49,40 @@ export default function UserForm() {
         const { name, value } = event.target;
         setFormData((prevFormData) => ({...prevFormData, [name]: Number(value) }));
       };
+
+    const validateForm = (): boolean => {
+        let valid = true;
+        const newErrors: Partial<UserFormData> = {};
+    
+        if (formData.firstName.trim() === '') {
+          newErrors.firstName = 'First name is required';
+          valid = false;
+        }
+    
+        if (formData.lastName.trim() === '') {
+          newErrors.lastName = 'Last name is required';
+          valid = false;
+        }
+    
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+          newErrors.email = 'Invalid email address';
+          valid = false;
+        }
+    
+        if (!/^[0-9]{10}$/.test(formData.phoneNumber)) {
+          newErrors.phoneNumber = 'Invalid phone number';
+          valid = false;
+        }
+
+        if(formData.address.trim() === ''){
+            newErrors.address = 'Address is required';
+            valid = false;
+        }
+    
+        setErrors(newErrors);
+        return valid;
+    };
+
 
     return (
         <FormControl margin="normal" style={{margin: 30, width: "600px"}}>
