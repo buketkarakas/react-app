@@ -1,5 +1,6 @@
 import { Select, TextField, Button, SelectChangeEvent, MenuItem, FormControl, FormLabel, InputLabel } from "@mui/material";
 import React, { useState } from "react";
+import UserService from "./services/user"
 
 interface UserFormData {
     firstName: string;
@@ -25,7 +26,17 @@ export default function UserForm() {
 
     const handleSubmit = (event: any) => {
         event.preventDefault();
-        console.log(formData);
+        UserService
+        .create(formData)
+        .then(response => setFormData({
+            firstName: '',
+            lastName: '',
+            email: '',
+            phoneNumber: '',
+            age: 18,
+            address: ''
+        }))
+        
     }
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement> ) => {
