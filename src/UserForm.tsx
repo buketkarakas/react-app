@@ -156,7 +156,7 @@ export default function UserForm() {
                     </MenuItem>
                     ))}
             </TextField>
-            <Button sx={{margin: 5}} color="secondary" variant="contained" onClick={handleSubmit}>Submit</Button>
+            <Button  sx={{margin: 5}} color="secondary" variant="contained" onClick={handleSubmit}>Submit</Button>
         </FormControl>
     )
 

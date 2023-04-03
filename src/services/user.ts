@@ -12,11 +12,12 @@ interface UserFormData {
     address: string;
 }
 
-const create = (newObject: UserFormData) => {
+const create = async (newObject: UserFormData) => {
     const id = uuidv4();
     const userWithId = { id, ...newObject };
     const request = axios.post(baseUrl, userWithId)
-    return request.then(response => response.data)
+    const response = await request;
+    return response.data;
 }
 
 export default {
