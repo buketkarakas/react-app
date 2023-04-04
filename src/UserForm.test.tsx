@@ -55,7 +55,6 @@ describe('UserForm component', () => {
   
     createMock.mockRestore();
 
-    // You can also add more assertions to verify that the form resets after submission
   });
   test("validateForm returns true when all fields are valid", () => {
     const { getByLabelText, queryByText } = render(<UserForm />);
@@ -102,7 +101,6 @@ describe('UserForm component', () => {
     const createMock = jest.spyOn(UserService, 'create').mockImplementation(() => Promise.resolve({}));
     render(<UserForm />);
 
-    // fill out form
     userEvent.type(screen.getByLabelText('First Name'), 'John');
     userEvent.type(screen.getByLabelText('Last Name'), 'Doe');
     userEvent.type(screen.getByLabelText('Email'), 'johndoe@example.com');
@@ -111,10 +109,8 @@ describe('UserForm component', () => {
     await act(async () => {
       fireEvent.select(screen.getByLabelText('Age'), { target: { selectedIndex: 2 } });
     });
-    // submit form
     fireEvent.click(screen.getByRole('button', { name: 'Submit' }));
 
-    // assert form data is reset
     await waitFor(() => {
       expect(screen.getByLabelText('First Name')).toHaveValue('');
       expect(screen.getByLabelText('Last Name')).toHaveValue('');
@@ -125,6 +121,4 @@ describe('UserForm component', () => {
     // cleanup
     createMock.mockRestore();
   });
-
-  // You can also write more tests to cover edge cases and error handling
 });
