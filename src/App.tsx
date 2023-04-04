@@ -1,8 +1,10 @@
-import './App.css';
-import UserForm from './UserForm';
-import { AppBar, Toolbar, Icon, Typography } from '@mui/material';
-import LightbulbIcon from '@mui/icons-material/Lightbulb';
-function App() {
+import './App.css'
+import UserForm from './UserForm'
+import { AppBar, Toolbar, Typography } from '@mui/material'
+import LightbulbIcon from '@mui/icons-material/Lightbulb'
+import React from 'react'
+
+function App () {
   return (
     <div className="App">
       <AppBar position='static' enableColorOnDark color='secondary'>
@@ -15,7 +17,7 @@ function App() {
       </AppBar>
       <UserForm/>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

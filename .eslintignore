@@ -1,0 +1,5 @@
+/node_modules/
+
+/src/App.css
+/src/index.css
+/src/react-app-env.d.ts
